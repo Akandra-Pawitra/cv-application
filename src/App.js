@@ -6,7 +6,28 @@ import { Personal } from './components/personal'
 class Form extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      firstName: '',
+      lastName: '',
+      address: '',
+      phone: '',
+      email: '',
+      social: '',
+      school: '',
+      study: '',
+      startEdu: '',
+      endEdu: '',
+      company: '',
+      role: '',
+      startWork: '',
+      endWork: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange (info, data) {
+    this.setState({ [info]: data })
   }
 
   handleSubmit (event) {
@@ -18,9 +39,9 @@ class Form extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div id='info'>
-          <Personal getData={this.getData}/>
-          <Education getData={this.getData}/>
-          <Experience getData={this.getData}/>
+          <Personal info={this.state} handleChange={this.handleChange} />
+          <Education info={this.state} handleChange={this.handleChange} />
+          <Experience info={this.state} handleChange={this.handleChange} />
         </div>
         <div id='submit'>
           <input type='submit' value='CREATE' />

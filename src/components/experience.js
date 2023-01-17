@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Label () {
   return (
@@ -25,17 +26,11 @@ function Colon () {
 export class Experience extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      company: '',
-      role: '',
-      startWork: '',
-      endWork: ''
-    }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   handleInputChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
+    this.props.handleChange(event.target.name, event.target.value)
     event.preventDefault()
   }
 
@@ -52,7 +47,7 @@ export class Experience extends React.Component {
               id="company"
               name='company'
               placeholder="Last Company Name"
-              value={this.state.company}
+              value={this.props.info.company}
               onChange={this.handleInputChange}
               required
             />
@@ -61,7 +56,7 @@ export class Experience extends React.Component {
               id="study"
               name='role'
               placeholder="Role"
-              value={this.state.role}
+              value={this.props.info.role}
               onChange={this.handleInputChange}
               required
             />
@@ -69,7 +64,7 @@ export class Experience extends React.Component {
               type="date"
               id="start-work"
               name='startWork'
-              value={this.state.startWork}
+              value={this.props.info.startWork}
               onChange={this.handleInputChange}
               required
             />
@@ -77,7 +72,7 @@ export class Experience extends React.Component {
               type="date"
               id="end-work"
               name='endWork'
-              value={this.state.endWork}
+              value={this.props.info.endWork}
               onChange={this.handleInputChange}
             />
           </div>
@@ -85,4 +80,9 @@ export class Experience extends React.Component {
       </div>
     )
   }
+}
+
+Experience.propTypes = {
+  info: PropTypes.object,
+  handleChange: PropTypes.func
 }

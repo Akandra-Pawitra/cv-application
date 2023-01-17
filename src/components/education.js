@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Label () {
   return (
@@ -25,17 +26,11 @@ function Colon () {
 export class Education extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      school: '',
-      study: '',
-      start: '',
-      end: ''
-    }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   handleInputChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
+    this.props.handleChange(event.target.name, event.target.value)
     event.preventDefault()
   }
 
@@ -52,7 +47,7 @@ export class Education extends React.Component {
               id="school"
               name='school'
               placeholder="School/University"
-              value={this.state.school}
+              value={this.props.info.school}
               onChange={this.handleInputChange}
               required
             />
@@ -61,7 +56,7 @@ export class Education extends React.Component {
               id="study"
               name='study'
               placeholder="Study"
-              value={this.state.study}
+              value={this.props.info.study}
               onChange={this.handleInputChange}
               required
             />
@@ -69,7 +64,7 @@ export class Education extends React.Component {
               type="date"
               id="start"
               name='start'
-              value={this.state.start}
+              value={this.props.info.startEdu}
               onChange={this.handleInputChange}
               required
             />
@@ -77,7 +72,7 @@ export class Education extends React.Component {
               type="date"
               id="end"
               name='end'
-              value={this.state.end}
+              value={this.props.info.endEdu}
               onChange={this.handleInputChange}
               required
               />
@@ -86,4 +81,9 @@ export class Education extends React.Component {
       </div>
     )
   }
+}
+
+Education.propTypes = {
+  info: PropTypes.object,
+  handleChange: PropTypes.func
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Label () {
   return (
@@ -29,19 +30,11 @@ function Colon () {
 export class Personal extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      firstName: '',
-      lastName: '',
-      address: '',
-      phone: '',
-      email: '',
-      social: ''
-    }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   handleInputChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
+    this.props.handleChange(event.target.name, event.target.value)
     event.preventDefault()
   }
 
@@ -58,7 +51,7 @@ export class Personal extends React.Component {
               id="first-name"
               name='firstName'
               placeholder="First Name"
-              value={this.state.firstName}
+              value={this.props.info.firstName}
               onChange={this.handleInputChange}
               required
             />
@@ -67,7 +60,7 @@ export class Personal extends React.Component {
               id="last-name"
               name='lastName'
               placeholder="Last Name"
-              value={this.state.lastName}
+              value={this.props.info.lastName}
               onChange={this.handleInputChange}
               required
             />
@@ -76,7 +69,7 @@ export class Personal extends React.Component {
               id="address"
               name='address'
               placeholder="Address"
-              value={this.state.address}
+              value={this.props.info.address}
               onChange={this.handleInputChange}
               required
             />
@@ -85,7 +78,7 @@ export class Personal extends React.Component {
               id="phone-number"
               name='phone'
               placeholder="Phone Number"
-              value={this.state.phone}
+              value={this.props.info.phone}
               onChange={this.handleInputChange}
               required
             />
@@ -94,7 +87,7 @@ export class Personal extends React.Component {
               id="email"
               name='email'
               placeholder="Email"
-              value={this.state.email}
+              value={this.props.info.email}
               onChange={this.handleInputChange}
             />
             <input
@@ -102,7 +95,7 @@ export class Personal extends React.Component {
               id="social-media"
               name='social'
               placeholder="Social Media"
-              value={this.state.social}
+              value={this.props.info.social}
               onChange={this.handleInputChange}
             />
           </div>
@@ -110,4 +103,9 @@ export class Personal extends React.Component {
       </div>
     )
   }
+}
+
+Personal.propTypes = {
+  info: PropTypes.object,
+  handleChange: PropTypes.func
 }
