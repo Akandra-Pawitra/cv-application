@@ -31,7 +31,7 @@ class Form extends React.Component {
   }
 
   handleSubmit (event) {
-    // do something
+    console.log(this.state)
     event.preventDefault()
   }
 

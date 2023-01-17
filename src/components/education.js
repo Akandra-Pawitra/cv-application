@@ -23,7 +23,7 @@ function Colon () {
   )
 }
 
-export class Education extends React.Component {
+class Input extends React.Component {
   constructor (props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -36,51 +36,64 @@ export class Education extends React.Component {
 
   render () {
     return (
+      <div className="input-edu-grid">
+        <input
+          type="text"
+          id="school"
+          name='school'
+          placeholder="School/University"
+          value={this.props.info.school}
+          onChange={this.handleInputChange}
+          required
+        />
+        <input
+          type="text"
+          id="study"
+          name='study'
+          placeholder="Study"
+          value={this.props.info.study}
+          onChange={this.handleInputChange}
+          required
+        />
+        <input
+          type="date"
+          id="start"
+          name='startEdu'
+          value={this.props.info.startEdu}
+          onChange={this.handleInputChange}
+          required
+        />
+        <input
+          type="date"
+          id="end"
+          name='endEdu'
+          value={this.props.info.endEdu}
+          onChange={this.handleInputChange}
+          required
+        />
+      </div>
+    )
+  }
+}
+
+export class Education extends React.Component {
+  render () {
+    return (
       <div id="edu">
         <h3>EDUCATION</h3>
         <div className="input">
           <Label />
           <Colon />
-          <div className="input-edu-grid">
-            <input
-              type="text"
-              id="school"
-              name='school'
-              placeholder="School/University"
-              value={this.props.info.school}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              id="study"
-              name='study'
-              placeholder="Study"
-              value={this.props.info.study}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="date"
-              id="start"
-              name='start'
-              value={this.props.info.startEdu}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="date"
-              id="end"
-              name='end'
-              value={this.props.info.endEdu}
-              onChange={this.handleInputChange}
-              required
-              />
-          </div>
+          <Input info={this.props.info} handleChange={this.props.handleChange}/>
         </div>
       </div>
     )
   }
+}
+
+Input.propTypes = {
+  info: PropTypes.object,
+  handleChange: PropTypes.func
 }
 
 Education.propTypes = {

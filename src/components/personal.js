@@ -27,7 +27,7 @@ function Colon () {
   )
 }
 
-export class Personal extends React.Component {
+class Input extends React.Component {
   constructor (props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -40,69 +40,82 @@ export class Personal extends React.Component {
 
   render () {
     return (
+      <div className="input-personal-grid">
+        <input
+          type="text"
+          id="first-name"
+          name='firstName'
+          placeholder="First Name"
+          value={this.props.info.firstName}
+          onChange={this.handleInputChange}
+          required
+        />
+        <input
+          type="text"
+          id="last-name"
+          name='lastName'
+          placeholder="Last Name"
+          value={this.props.info.lastName}
+          required
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          id="address"
+          name='address'
+          placeholder="Address"
+          value={this.props.info.address}
+          required
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="tel"
+          id="phone-number"
+          name='phone'
+          placeholder="Phone Number"
+          value={this.props.info.phone}
+          required
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="email"
+          id="email"
+          name='email'
+          placeholder="Email"
+          value={this.props.info.email}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          id="social-media"
+          name='social'
+          placeholder="Social Media"
+          value={this.props.info.social}
+          onChange={this.handleInputChange}
+        />
+      </div>
+    )
+  }
+}
+
+export class Personal extends React.Component {
+  render () {
+    return (
       <div id='personal'>
         <h3>PERSONAL INFORMATION</h3>
         <div className="input">
           <Label />
           <Colon />
-          <div className="input-personal-grid">
-            <input
-              type="text"
-              id="first-name"
-              name='firstName'
-              placeholder="First Name"
-              value={this.props.info.firstName}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              id="last-name"
-              name='lastName'
-              placeholder="Last Name"
-              value={this.props.info.lastName}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              id="address"
-              name='address'
-              placeholder="Address"
-              value={this.props.info.address}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="tel"
-              id="phone-number"
-              name='phone'
-              placeholder="Phone Number"
-              value={this.props.info.phone}
-              onChange={this.handleInputChange}
-              required
-            />
-            <input
-              type="email"
-              id="email"
-              name='email'
-              placeholder="Email"
-              value={this.props.info.email}
-              onChange={this.handleInputChange}
-            />
-            <input
-              type="text"
-              id="social-media"
-              name='social'
-              placeholder="Social Media"
-              value={this.props.info.social}
-              onChange={this.handleInputChange}
-            />
-          </div>
+          <Input info={this.props.info} handleChange={this.props.handleChange}/>
         </div>
       </div>
     )
   }
+}
+
+Input.propTypes = {
+  info: PropTypes.object,
+  handleChange: PropTypes.func
 }
 
 Personal.propTypes = {
