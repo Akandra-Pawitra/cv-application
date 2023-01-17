@@ -17,6 +17,6 @@ module.exports = {
     'react'
   ],
   rules: {
-    'no-useless-constructor': 0
+    // 'no-useless-constructor': 0
   }
 }

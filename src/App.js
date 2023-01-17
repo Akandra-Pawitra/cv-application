@@ -1,43 +1,40 @@
 import React from 'react'
-import Info from './components/info'
-import Submit from './components/submit'
+import { Education } from './components/education'
+import { Experience } from './components/experience'
+import { Personal } from './components/personal'
 
 class Form extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit (event) {
+    // do something
+    event.preventDefault()
   }
 
   render () {
     return (
-      <form>
-        <Info />
-        <Submit />
+      <form onSubmit={this.handleSubmit}>
+        <div id='info'>
+          <Personal getData={this.getData}/>
+          <Education getData={this.getData}/>
+          <Experience getData={this.getData}/>
+        </div>
+        <div id='submit'>
+          <input type='submit' value='CREATE' />
+        </div>
       </form>
     )
   }
 }
 
-class Header extends React.Component {
-  constructor () {
-    super()
-  }
-
-  render () {
-    return (
-      <h1 id='title'>CREATE YOUR CV</h1>
-    )
-  }
-}
-
 class App extends React.Component {
-  constructor () {
-    super()
-  }
-
   render () {
     return (
       <div className='wrapper'>
-        <Header />
+        <h1 id='title'>CREATE YOUR CV</h1>
         <Form />
       </div>
     )
