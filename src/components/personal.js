@@ -48,7 +48,6 @@ class Input extends React.Component {
           placeholder="First Name"
           value={this.props.info.firstName}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="text"
@@ -56,7 +55,6 @@ class Input extends React.Component {
           name='lastName'
           placeholder="Last Name"
           value={this.props.info.lastName}
-          required
           onChange={this.handleInputChange}
         />
         <input
@@ -65,7 +63,6 @@ class Input extends React.Component {
           name='address'
           placeholder="Address"
           value={this.props.info.address}
-          required
           onChange={this.handleInputChange}
         />
         <input
@@ -74,7 +71,6 @@ class Input extends React.Component {
           name='phone'
           placeholder="Phone Number"
           value={this.props.info.phone}
-          required
           onChange={this.handleInputChange}
         />
         <input
@@ -98,7 +94,22 @@ class Input extends React.Component {
   }
 }
 
-export class Personal extends React.Component {
+class Display extends React.Component {
+  render () {
+    return (
+      <div className="input-personal-grid">
+        <p>{this.props.info.firstName}</p>
+        <p>{this.props.info.lastName}</p>
+        <p>{this.props.info.address}</p>
+        <p>{this.props.info.phone}</p>
+        <p>{this.props.info.email}</p>
+        <p>{this.props.info.social}</p>
+      </div>
+    )
+  }
+}
+
+export class InputPersonal extends React.Component {
   render () {
     return (
       <div id='personal'>
@@ -113,12 +124,35 @@ export class Personal extends React.Component {
   }
 }
 
+export class DisplayPersonal extends React.Component {
+  render () {
+    return (
+      <div id='personal'>
+        <h3>PERSONAL INFORMATION</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Display info={this.props.info}/>
+        </div>
+      </div>
+    )
+  }
+}
+
 Input.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
 }
 
-Personal.propTypes = {
+InputPersonal.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
+}
+
+Display.propTypes = {
+  info: PropTypes.object
+}
+
+DisplayPersonal.propTypes = {
+  info: PropTypes.object
 }

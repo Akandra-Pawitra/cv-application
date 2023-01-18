@@ -44,7 +44,6 @@ class Input extends React.Component {
           placeholder="School/University"
           value={this.props.info.school}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="text"
@@ -53,7 +52,6 @@ class Input extends React.Component {
           placeholder="Study"
           value={this.props.info.study}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="date"
@@ -61,7 +59,6 @@ class Input extends React.Component {
           name='startEdu'
           value={this.props.info.startEdu}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="date"
@@ -69,14 +66,26 @@ class Input extends React.Component {
           name='endEdu'
           value={this.props.info.endEdu}
           onChange={this.handleInputChange}
-          required
         />
       </div>
     )
   }
 }
 
-export class Education extends React.Component {
+class Display extends React.Component {
+  render () {
+    return (
+      <div className="input-edu-grid">
+        <p>{this.props.info.school}</p>
+        <p>{this.props.info.study}</p>
+        <p>{this.props.info.startEdu}</p>
+        <p>{this.props.info.endEdu}</p>
+      </div>
+    )
+  }
+}
+
+export class InputEducation extends React.Component {
   render () {
     return (
       <div id="edu">
@@ -91,12 +100,35 @@ export class Education extends React.Component {
   }
 }
 
+export class DisplayEducation extends React.Component {
+  render () {
+    return (
+      <div id='edu'>
+        <h3>EDUCATION</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Display info={this.props.info}/>
+        </div>
+      </div>
+    )
+  }
+}
+
 Input.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
 }
 
-Education.propTypes = {
+InputEducation.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
+}
+
+Display.propTypes = {
+  info: PropTypes.object
+}
+
+DisplayEducation.propTypes = {
+  info: PropTypes.object
 }

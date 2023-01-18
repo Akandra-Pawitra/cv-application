@@ -44,7 +44,6 @@ class Input extends React.Component {
           placeholder="Last Company Name"
           value={this.props.info.company}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="text"
@@ -53,7 +52,6 @@ class Input extends React.Component {
           placeholder="Role"
           value={this.props.info.role}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="date"
@@ -61,7 +59,6 @@ class Input extends React.Component {
           name='startWork'
           value={this.props.info.startWork}
           onChange={this.handleInputChange}
-          required
         />
         <input
           type="date"
@@ -75,7 +72,20 @@ class Input extends React.Component {
   }
 }
 
-export class Experience extends React.Component {
+class Display extends React.Component {
+  render () {
+    return (
+      <div className="input-exp-grid">
+        <p>{this.props.info.company}</p>
+        <p>{this.props.info.role}</p>
+        <p>{this.props.info.startWork}</p>
+        <p>{this.props.info.endWork}</p>
+      </div>
+    )
+  }
+}
+
+export class InputExperience extends React.Component {
   render () {
     return (
       <div id="exp">
@@ -90,12 +100,35 @@ export class Experience extends React.Component {
   }
 }
 
+export class DisplayExperience extends React.Component {
+  render () {
+    return (
+      <div id='exp'>
+        <h3>EXPERIENCE</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Display info={this.props.info}/>
+        </div>
+      </div>
+    )
+  }
+}
+
 Input.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
 }
 
-Experience.propTypes = {
+InputExperience.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
+}
+
+Display.propTypes = {
+  info: PropTypes.object
+}
+
+DisplayExperience.propTypes = {
+  info: PropTypes.object
 }

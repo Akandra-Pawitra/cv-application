@@ -21,10 +21,15 @@ body {
   padding: 2rem 1rem;
 }
 
-form {
+#create-cv,
+#confirm-cv {
   border: 4px double white;
   padding: 20px;
   margin-bottom: 20px;
+}
+
+#confirm-cv {
+  display: none;
 }
 
 .input {
@@ -52,12 +57,15 @@ form {
   margin: 0;
 }
 
-#submit {
+#submit,
+#confirm {
   padding: 1rem;
   display: flex;
+  justify-content: center;
 }
 
-#submit input {
+#submit button,
+#confirm button {
   width: 150px;
-  margin: auto;
+  margin: 10px;
 }
