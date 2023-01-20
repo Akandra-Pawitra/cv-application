@@ -23,96 +23,46 @@ function Colon () {
   )
 }
 
-class Input extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
-
-  handleInputChange (event) {
-    this.props.handleChange(event.target.name, event.target.value)
+function Input (props) {
+  const handleInputChange = event => {
+    props.handleChange(event.target.name, event.target.value)
     event.preventDefault()
   }
 
-  render () {
-    return (
+  return (
       <div className="input-edu-grid">
         <input
           type="text"
           id="school"
           name='school'
           placeholder="School/University"
-          value={this.props.info.school}
-          onChange={this.handleInputChange}
+          value={props.info.school}
+          onChange={handleInputChange}
         />
         <input
           type="text"
           id="study"
           name='study'
           placeholder="Study"
-          value={this.props.info.study}
-          onChange={this.handleInputChange}
+          value={props.info.study}
+          onChange={handleInputChange}
         />
         <input
           type="date"
           id="start"
           name='startEdu'
-          value={this.props.info.startEdu}
-          onChange={this.handleInputChange}
+          value={props.info.startEdu}
+          onChange={handleInputChange}
         />
         <input
           type="date"
           id="end"
           name='endEdu'
-          value={this.props.info.endEdu}
-          onChange={this.handleInputChange}
+          value={props.info.endEdu}
+          onChange={handleInputChange}
         />
       </div>
-    )
-  }
-}
-
-class Display extends React.Component {
-  render () {
-    return (
-      <div className="input-edu-grid">
-        <p>{this.props.info.school}</p>
-        <p>{this.props.info.study}</p>
-        <p>{this.props.info.startEdu}</p>
-        <p>{this.props.info.endEdu}</p>
-      </div>
-    )
-  }
-}
-
-export class InputEducation extends React.Component {
-  render () {
-    return (
-      <div id="edu">
-        <h3>EDUCATION</h3>
-        <div className="input">
-          <Label />
-          <Colon />
-          <Input info={this.props.info} handleChange={this.props.handleChange}/>
-        </div>
-      </div>
-    )
-  }
-}
-
-export class DisplayEducation extends React.Component {
-  render () {
-    return (
-      <div id='edu'>
-        <h3>EDUCATION</h3>
-        <div className="input">
-          <Label />
-          <Colon />
-          <Display info={this.props.info}/>
-        </div>
-      </div>
-    )
-  }
+  )
 }
 
 Input.propTypes = {
@@ -120,13 +70,50 @@ Input.propTypes = {
   handleChange: PropTypes.func
 }
 
+function Display (props) {
+  return (
+    <div className="input-edu-grid">
+        <p>{props.info.school}</p>
+        <p>{props.info.study}</p>
+        <p>{props.info.startEdu}</p>
+        <p>{props.info.endEdu}</p>
+      </div>
+  )
+}
+
+Display.propTypes = {
+  info: PropTypes.object
+}
+
+export function InputEducation (props) {
+  return (
+    <div id="edu">
+        <h3>EDUCATION</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Input info={props.info} handleChange={props.handleChange}/>
+        </div>
+      </div>
+  )
+}
+
 InputEducation.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
 }
 
-Display.propTypes = {
-  info: PropTypes.object
+export function DisplayEducation (props) {
+  return (
+    <div id='edu'>
+        <h3>EDUCATION</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Display info={props.info}/>
+        </div>
+      </div>
+  )
 }
 
 DisplayEducation.propTypes = {

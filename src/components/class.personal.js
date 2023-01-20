@@ -27,64 +27,116 @@ function Colon () {
   )
 }
 
-function Input (props) {
-  const handleInputChange = event => {
-    props.handleChange(event.target.name, event.target.value)
+class Input extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleInputChange = this.handleInputChange.bind(this)
+  }
+
+  handleInputChange (event) {
+    this.props.handleChange(event.target.name, event.target.value)
     event.preventDefault()
   }
 
-  return (
+  render () {
+    return (
       <div className="input-personal-grid">
         <input
           type="text"
           id="first-name"
           name='firstName'
           placeholder="First Name"
-          value={props.info.firstName}
-          onChange={handleInputChange}
+          value={this.props.info.firstName}
+          onChange={this.handleInputChange}
         />
         <input
           type="text"
           id="last-name"
           name='lastName'
           placeholder="Last Name"
-          value={props.info.lastName}
-          onChange={handleInputChange}
+          value={this.props.info.lastName}
+          onChange={this.handleInputChange}
         />
         <input
           type="text"
           id="address"
           name='address'
           placeholder="Address"
-          value={props.info.address}
-          onChange={handleInputChange}
+          value={this.props.info.address}
+          onChange={this.handleInputChange}
         />
         <input
           type="tel"
           id="phone-number"
           name='phone'
           placeholder="Phone Number"
-          value={props.info.phone}
-          onChange={handleInputChange}
+          value={this.props.info.phone}
+          onChange={this.handleInputChange}
         />
         <input
           type="email"
           id="email"
           name='email'
           placeholder="Email"
-          value={props.info.email}
-          onChange={handleInputChange}
+          value={this.props.info.email}
+          onChange={this.handleInputChange}
         />
         <input
           type="text"
           id="social-media"
           name='social'
           placeholder="Social Media"
-          value={props.info.social}
-          onChange={handleInputChange}
+          value={this.props.info.social}
+          onChange={this.handleInputChange}
         />
       </div>
-  )
+    )
+  }
+}
+
+class Display extends React.Component {
+  render () {
+    return (
+      <div className="input-personal-grid">
+        <p>{this.props.info.firstName}</p>
+        <p>{this.props.info.lastName}</p>
+        <p>{this.props.info.address}</p>
+        <p>{this.props.info.phone}</p>
+        <p>{this.props.info.email}</p>
+        <p>{this.props.info.social}</p>
+      </div>
+    )
+  }
+}
+
+export class InputPersonal extends React.Component {
+  render () {
+    return (
+      <div id='personal'>
+        <h3>PERSONAL INFORMATION</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Input info={this.props.info} handleChange={this.props.handleChange}/>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class DisplayPersonal extends React.Component {
+  render () {
+    return (
+      <div id='personal'>
+        <h3>PERSONAL INFORMATION</h3>
+        <div className="input">
+          <Label />
+          <Colon />
+          <Display info={this.props.info}/>
+        </div>
+      </div>
+    )
+  }
 }
 
 Input.propTypes = {
@@ -92,52 +144,13 @@ Input.propTypes = {
   handleChange: PropTypes.func
 }
 
-function Display (props) {
-  return (
-    <div className="input-personal-grid">
-        <p>{props.info.firstName}</p>
-        <p>{props.info.lastName}</p>
-        <p>{props.info.address}</p>
-        <p>{props.info.phone}</p>
-        <p>{props.info.email}</p>
-        <p>{props.info.social}</p>
-      </div>
-  )
-}
-
-Display.propTypes = {
-  info: PropTypes.object
-}
-
-export function InputPersonal (props) {
-  return (
-    <div id='personal'>
-        <h3>PERSONAL INFORMATION</h3>
-        <div className="input">
-          <Label />
-          <Colon />
-          <Input info={props.info} handleChange={props.handleChange}/>
-        </div>
-      </div>
-  )
-}
-
 InputPersonal.propTypes = {
   info: PropTypes.object,
   handleChange: PropTypes.func
 }
 
-export function DisplayPersonal (props) {
-  return (
-    <div id='personal'>
-        <h3>PERSONAL INFORMATION</h3>
-        <div className="input">
-          <Label />
-          <Colon />
-          <Display info={props.info}/>
-        </div>
-      </div>
-  )
+Display.propTypes = {
+  info: PropTypes.object
 }
 
 DisplayPersonal.propTypes = {

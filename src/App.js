@@ -1,16 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { InputEducation, DisplayEducation } from './components/education'
 import { InputExperience, DisplayExperience } from './components/experience'
 import { InputPersonal, DisplayPersonal } from './components/personal'
 
-class Form extends React.Component {
-  constructor (props) {
-    super(props)
-    this.createCv = this.createCv.bind(this)
-  }
-
-  createCv () {
+function Form (props) {
+  const createCv = () => {
     const title = document.getElementById('title')
     const create = document.getElementById('create-cv')
     const confirm = document.getElementById('confirm-cv')
@@ -19,20 +14,18 @@ class Form extends React.Component {
     confirm.style = 'display: block'
   }
 
-  render () {
-    return (
-      <fieldset id='create-cv'>
-        <div id='info'>
-          <InputPersonal info={this.props.info} handleChange={this.props.handleChange} />
-          <InputEducation info={this.props.info} handleChange={this.props.handleChange} />
-          <InputExperience info={this.props.info} handleChange={this.props.handleChange} />
+  return (
+    <fieldset id='create-cv'>
+      <div id='info'>
+        <InputPersonal info={props.info} handleChange={props.handleChange} />
+        <InputEducation info={props.info} handleChange={props.handleChange} />
+        <InputExperience info={props.info} handleChange={props.handleChange} />
+      </div>
+      <div id='submit'>
+          <button onClick={createCv}>CREATE</button>
         </div>
-        <div id='submit'>
-          <button onClick={this.createCv}>CREATE</button>
-        </div>
-      </fieldset>
-    )
-  }
+    </fieldset>
+  )
 }
 
 Form.propTypes = {
@@ -40,14 +33,8 @@ Form.propTypes = {
   handleChange: PropTypes.func
 }
 
-class Edit extends React.Component {
-  constructor (props) {
-    super(props)
-    this.editCv = this.editCv.bind(this)
-    this.confirmCv = this.confirmCv.bind(this)
-  }
-
-  editCv () {
+function Edit (props) {
+  const editCv = () => {
     const title = document.getElementById('title')
     const create = document.getElementById('create-cv')
     const confirm = document.getElementById('confirm-cv')
@@ -56,7 +43,7 @@ class Edit extends React.Component {
     confirm.style = 'display: none'
   }
 
-  confirmCv () {
+  const confirmCv = () => {
     const title = document.getElementById('title')
     const confirm = document.getElementById('confirm')
     const create = document.getElementById('create-cv')
@@ -67,66 +54,57 @@ class Edit extends React.Component {
     cv.style = 'padding-bottom: 43px; margin-top: 95px; display: block'
   }
 
-  render () {
-    return (
-      <fieldset id='confirm-cv'>
+  return (
+    <fieldset id='confirm-cv'>
         <div id='edit'>
-          <DisplayPersonal info={this.props.info} />
-          <DisplayEducation info={this.props.info} />
-          <DisplayExperience info={this.props.info} />
+          <DisplayPersonal info={props.info} />
+          <DisplayEducation info={props.info} />
+          <DisplayExperience info={props.info} />
         </div>
         <div id='confirm'>
-          <button onClick={this.editCv}>EDIT</button>
-          <button onClick={this.confirmCv}>CONFIRM</button>
+          <button onClick={editCv}>EDIT</button>
+          <button onClick={confirmCv}>CONFIRM</button>
         </div>
       </fieldset>
-    )
-  }
+  )
 }
 
 Edit.propTypes = {
   info: PropTypes.object
 }
 
-class App extends React.Component {
-  constructor () {
-    super()
-    this.state = {
-      firstName: '',
-      lastName: '',
-      address: '',
-      phone: '',
-      email: '',
-      social: '',
-      school: '',
-      study: '',
-      startEdu: '',
-      endEdu: '',
-      company: '',
-      role: '',
-      startWork: '',
-      endWork: ''
-    }
-    this.handleChange = this.handleChange.bind(this)
+export default function App () {
+  const info = {
+    firstName: '',
+    lastName: '',
+    address: '',
+    phone: '',
+    email: '',
+    social: '',
+    school: '',
+    study: '',
+    startEdu: '',
+    endEdu: '',
+    company: '',
+    role: '',
+    startWork: '',
+    endWork: ''
+  }
+  const [data, setData] = useState(info)
+
+  const handleChange = (key, value) => {
+    setData({ ...data, [key]: value })
   }
 
-  handleChange (info, data) {
-    this.setState({ [info]: data })
-  }
-
-  render () {
-    return (
-      <div className='wrapper'>
+  return (
+    <div className='wrapper'>
         <h1 id='title'>CREATE YOUR CV</h1>
         <div id='input-cv'>
-          <Form info={this.state} handleChange={this.handleChange} />
+          <Form info={data} handleChange={handleChange} />
         </div>
         <div id='edit-cv'>
-          <Edit info={this.state} />
+          <Edit info={data} />
         </div>
       </div>
-    )
-  }
+  )
 }
-
-export default App
